@@ -31,8 +31,8 @@ app.get("/", function (req, res) {
 //   console.log("Example app listening on port 3001!");
 // });
 
-https.createServer(sslOptions, app).listen(443, () => {
-      console.log('HTTPS Server running on https://localhost');
+https.createServer(sslOptions, app).listen(3001, () => {
+      console.log('HTTPS Server running on https://localhost:3001');
   });
 
 
