@@ -1,6 +1,13 @@
 const express = require("express");
 const app = express();
 const path = require('path');
+const https = require('https');
+const fs = require('fs');
+
+const sslOptions = {
+      key: fs.readFileSync(path.join(__dirname, 'server.key')),
+      cert: fs.readFileSync(path.join(__dirname, 'server.cert')),
+  };
 
 app.get("/", function (req, res) {
   const options = {
@@ -20,6 +27,23 @@ app.get("/", function (req, res) {
   });
 });
 
-app.listen(3001, function () {
-  console.log("Example app listening on port 3001!");
-});
+// app.listen(3001, function () {
+//   console.log("Example app listening on port 3001!");
+// });
+
+https.createServer(sslOptions, app).listen(443, () => {
+      console.log('HTTPS Server running on https://localhost');
+  });
+
+
+
+
+// // Basic route to test
+// app.get('/', (req, res) => {
+//     res.send('Hello from HTTPS server!');
+// });
+
+// // Start HTTPS server
+// https.createServer(sslOptions, app).listen(443, () => {
+//     console.log('HTTPS Server running on https://localhost');
+// });
