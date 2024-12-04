@@ -9,41 +9,59 @@ const sslOptions = {
       cert: fs.readFileSync(path.join(__dirname, 'server.cert')),
   };
 
-app.get("/", function (req, res) {
+const fileName = ["CaviarDreams.ttf", "playwriteRegular.ttf", 'poppinsExtraBold.ttf'];
+
+app.get("/caviar", function (req, res) {
   const options = {
     root: path.join(`${__dirname}`),
   };
 
-  const fileName = "CaviarDreams.ttf";
 
-  res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+  res.setHeader('Content-Disposition', `attachment; filename="${fileName[0]}"`);
   
-  res.sendFile(fileName, options, function (err) {
+  res.sendFile(fileName[0], options, function (err) {
     if (err) {
       console.error("Error sending file:", err);
     } else {
-      console.log("Sent:", fileName);
+      console.log("Sent:", fileName[0]);
     }
   });
 });
 
-// app.listen(3001, function () {
-//   console.log("Example app listening on port 3001!");
-// });
+app.get("/playwrite", function (req, res) {
+  const options = {
+    root: path.join(`${__dirname}`),
+  };
+
+
+  res.setHeader('Content-Disposition', `attachment; filename="${fileName[1]}"`);
+  
+  res.sendFile(fileName[1], options, function (err) {
+    if (err) {
+      console.error("Error sending file:", err);
+    } else {
+      console.log("Sent:", fileName[1]);
+    }
+  });
+});
+
+app.get("/poppins", function (req, res) {
+  const options = {
+    root: path.join(`${__dirname}`),
+  };
+
+
+  res.setHeader('Content-Disposition', `attachment; filename="${fileName[2]}"`);
+  
+  res.sendFile(fileName[2], options, function (err) {
+    if (err) {
+      console.error("Error sending file:", err);
+    } else {
+      console.log("Sent:", fileName[2]);
+    }
+  });
+});
 
 https.createServer(sslOptions, app).listen(3001, () => {
       console.log('HTTPS Server running on https://localhost:3001');
   });
-
-
-
-
-// // Basic route to test
-// app.get('/', (req, res) => {
-//     res.send('Hello from HTTPS server!');
-// });
-
-// // Start HTTPS server
-// https.createServer(sslOptions, app).listen(443, () => {
-//     console.log('HTTPS Server running on https://localhost');
-// });
