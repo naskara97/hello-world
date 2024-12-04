@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
 const path = require('path');
-const https = require('https');
+const http = require('http');
 const fs = require('fs');
 
-const sslOptions = {
-      key: fs.readFileSync(path.join(__dirname, 'server.key')),
-      cert: fs.readFileSync(path.join(__dirname, 'server.cert')),
-  };
+// const sslOptions = {
+//       key: fs.readFileSync(path.join(__dirname, 'server.key')),
+//       cert: fs.readFileSync(path.join(__dirname, 'server.cert')),
+//   };
 
 const fileName = ["CaviarDreams.ttf", "playwriteRegular.ttf", 'poppinsExtraBold.ttf'];
 
@@ -62,6 +62,6 @@ app.get("/poppins", function (req, res) {
   });
 });
 
-https.createServer(sslOptions, app).listen(3001, () => {
-      console.log('HTTPS Server running on https://localhost:3001');
+http.createServer(app).listen(3001, () => {
+      console.log('HTTP Server running on https://localhost:3001');
   });
